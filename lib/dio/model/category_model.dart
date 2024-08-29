@@ -149,6 +149,7 @@ final availabilityStatusValues = EnumValues({
 
 enum Category {
   SMARTPHONES
+
 }
 
 final categoryValues = EnumValues({

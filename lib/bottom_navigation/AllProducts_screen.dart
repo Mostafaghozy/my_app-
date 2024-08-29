@@ -1,4 +1,3 @@
-//import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
 
 import 'package:flutter/material.dart';
 import 'package:first_app/dio/api_provider.dart';
@@ -211,7 +210,7 @@ Widget ProductItem({required Product product}) => Column(
       children: [
         CircleAvatar(
           radius: 35,
-          backgroundImage: NetworkImage(product.thumbnail!),
+          backgroundImage: NetworkImage(product.description!),
         ),
         SizedBox(
           height: 10,

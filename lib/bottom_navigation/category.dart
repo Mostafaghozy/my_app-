@@ -14,9 +14,7 @@ class _CategorysState extends State<Categorys> {
   bool isloading = true;
   CategoryModel? categoryModel;
 
-
-  Future getcategory()async{
-
+  Future getcategory() async {
     categoryModel = await ApiProvider().getcategory();
     setState(() {
       isloading = false;
@@ -25,10 +23,10 @@ class _CategorysState extends State<Categorys> {
 
   @override
   void initState() {
-
     super.initState();
     getcategory();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +46,7 @@ class _CategorysState extends State<Categorys> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 80),
               child: Text(
-                " Phones",
+                "phones",
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -57,82 +55,69 @@ class _CategorysState extends State<Categorys> {
             )
           ],
         ),
-
       ),
       body: isloading == true
           ? Center(
-        child: CircularProgressIndicator(
-          color: Colors.blue,
-        ),
-      )
+              child: CircularProgressIndicator(
+                color: Colors.blue,
+              ),
+            )
           : Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.grey[300],
-                ),
-                // child: Row(
-                //   children: [
-                //     Icon(Icons.search),
-                //     SizedBox(
-                //       width: 10,
-                //     ),
-                //     Text("Search")
-                //   ],
-                // ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              GridView.builder(
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) =>
-                    ProductItem(product: categoryModel!.products![index]),
-                /*separatorBuilder: (context, index) => SizedBox(
+              padding: const EdgeInsets.all(10.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) =>
+                          ProductItem(product: categoryModel!.products![index]),
+                      /*separatorBuilder: (context, index) => SizedBox(
                               width: 10,
                             ),*/
-                itemCount: categoryModel!.products!.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2),
+                      itemCount: categoryModel!.products!.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2),
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ),
-        ),
-      ),
-
+            ),
     );
   }
 }
 
 Widget ProductItem({required Product product}) => Column(
-  children: [
-    CircleAvatar(
-      radius: 35,
-      backgroundImage: NetworkImage(product.thumbnail!),
-    ),
-    SizedBox(
-      height: 10,
-    ),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Container(
-          width: 100,
-          child: Text(
-            product.category!.toString(),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        CircleAvatar(
+          radius: 35,
+          backgroundImage: NetworkImage(product.thumbnail!),
         ),
-        Text(product.id!.toString()),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              width: 100,
+              child: Text(
+                product.category!.toString(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            Text(product.id!.toString()),
+          ],
+        ),
       ],
-    ),
-  ],
-);
-
-
+    );
